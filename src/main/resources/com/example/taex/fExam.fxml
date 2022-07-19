@@ -48,4 +48,11 @@
 
       </Button>
    </bottom>
+   <top>
+      <Label fx:id="title" text="Label" wrapText="true" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+      </Label>
+   </top>
 </BorderPane>

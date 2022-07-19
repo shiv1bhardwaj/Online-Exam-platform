@@ -19,13 +19,14 @@ public class HelloApplication extends Application {
     static Connection con;
     static boolean eOrNot=false;
     private static String eic;
+    public static String title;
     private static String exam;
     static String stu_id;
     static{
         try{
         Class.forName("com.mysql.jdbc.Driver");
         con= DriverManager.getConnection(
-                "jdbc:mysql://0.tcp.ngrok.io:17876/project","shiv","bshiv577@");
+                "jdbc:mysql://192.168.43.166:3306/project","shiv","bshiv577@");
 
     }
         catch(Exception e){

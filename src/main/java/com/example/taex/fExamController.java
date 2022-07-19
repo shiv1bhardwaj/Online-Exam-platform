@@ -23,6 +23,9 @@ public class fExamController {
     private Label Q;
 
     @FXML
+    private Label title;
+
+    @FXML
     private VBox form;
 
     @FXML
@@ -43,6 +46,7 @@ public class fExamController {
     public void initialize(){
         questions=HelloApplication.getExam().split("\\$@\\(q\\)\\?");
         Button[] buttonArr=new Button[questions.length-1];
+        title.setText(HelloApplication.title);
         solutions=new String[questions.length-1];
         answers=new String[questions.length-1];
         ansIndex=new int[questions.length-1];

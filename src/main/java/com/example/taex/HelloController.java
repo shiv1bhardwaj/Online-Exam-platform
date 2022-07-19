@@ -19,6 +19,8 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class HelloController {
 
@@ -163,6 +165,13 @@ public class HelloController {
                 System.out.println("wrong EIC");
                 error.setText("wrong EIC");
             } else {
+                Statement stm = HelloApplication.con.createStatement();
+                ResultSet dateTime = stm.executeQuery("select examTime,title from exam where EIC='" + Eic.getText().trim() + "';");
+                dateTime.next();
+                String dateTimeInS=dateTime.getString(1);
+                HelloApplication.title=dateTime.getString(2);
+                if((int) ChronoUnit.MINUTES.between(LocalDateTime.of(Integer.parseInt(dateTimeInS.substring(0,4)),Integer.parseInt(dateTimeInS.substring(5,7)),Integer.parseInt(dateTimeInS.substring(8,10)),Integer.parseInt(dateTimeInS.substring(11,13)),Integer.parseInt(dateTimeInS.substring(14,16))), LocalDateTime.now())>0)
+                {LocalDateTime dTime;
                 HelloApplication.setExam(exam.getString(1));
                // System.out.println(exam.getString(1));
                 FXMLLoader fExam = new FXMLLoader(HelloApplication.class.getResource("fExam.fxml"));
@@ -182,8 +191,10 @@ public class HelloController {
                     }
                 });
 
-            }
-        } catch (SQLException | IOException e) {
+                }else
+                error.setText("You are early Your exam will start on "+dateTimeInS);
+                }
+        }catch (SQLException | IOException e) {
             e.printStackTrace();
         }
 
